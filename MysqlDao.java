@@ -17,7 +17,6 @@ public class MysqlDao {
 	private String PASSWORD="moshu521";
 	private Connection conn;
 	private PreparedStatement pst;
-	
 	static{
 		try {
 			Class.forName(DRIVER);
