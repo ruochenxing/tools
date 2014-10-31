@@ -3,7 +3,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
-
 public class CrawlerFile {
 
 	private static int lineNum=0;
