@@ -15,6 +15,12 @@ public class MysqlDao {
 	private String URL="jdbc:mysql://localhost:3306/db_bbs?useUnicode=true&amp;characterEncoding=utf8";
 	private String USER="root";
 	private String PASSWORD="moshu521";
+	/*
+	private static String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	private String URL = "jdbc:sqlserver://127.0.0.1:1433;DatabaseName=wooaDB";
+	private String USER = "sa";
+	private String PASSWORD = "123456";
+	*/
 	private Connection conn;
 	private PreparedStatement pst;
 	static{
@@ -99,12 +105,17 @@ public class MysqlDao {
 	}
 	
 	/******************测试************************/
-	public static void main(String []args){
+	public static void main(String []args) throws Exception{
 		MysqlDao dao=new MysqlDao();
 		String sql="select * from tb_class";
 		dao.doStatement(sql, null);
 		ResultSet result=dao.getResultSet();
-		//do sth
+		if(result!=null){
+			while(result.next()){
+				long useSize=result.getLong("totalsize");
+				String userid=result.getString("userid");
+			}
+		}
 		dao.closed();
 	}
 	public int update(String sql,Object[] params){
