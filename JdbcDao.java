@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * 数据库底层实现类
  * 需要使用mysql jar包
  * */
-public class MysqlDao {
+public class JdbcDao {
 	private static String DRIVER="com.mysql.jdbc.Driver";
 	private String URL="jdbc:mysql://localhost:3306/db_bbs?useUnicode=true&amp;characterEncoding=utf8";
 	private String USER="root";
@@ -106,7 +106,7 @@ public class MysqlDao {
 	
 	/******************测试************************/
 	public static void main(String []args) throws Exception{
-		MysqlDao dao=new MysqlDao();
+		JdbcDao dao=new JdbcDao();
 		String sql="select * from tb_class";
 		dao.doStatement(sql, null);
 		ResultSet result=dao.getResultSet();
