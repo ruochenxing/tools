@@ -71,4 +71,12 @@ public class FileUtil {
 			}
 		}
 	}
+	/**
+	* 复制文件	
+	*/
+	public void copyUseChannel(String dest,String src){
+		FileChannel rc = new FileInputStream(new File(dest)).getChannel(); 
+		rc.transferTo(0, rc.size(), new FileOutputStream(new File(src)).getChannel()); 
+		rc.close(); 
+	}
 }
