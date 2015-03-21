@@ -89,9 +89,7 @@ public class Crack {
             break;
         }
     }
- 
     int[] monthDays = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
- 
     private boolean isUsual() {
         boolean b = true;
         int year = nums[6] * 1000 + nums[7] * 100 + nums[8] * 10 + nums[9];
