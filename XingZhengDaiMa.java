@@ -1,5 +1,4 @@
-import java.util.HashMap;
-
+import java.util.*;
 public final class XingZhengDaiMa {
 	private XingZhengDaiMa(){}
 	static HashMap<Integer, String> hashMap = new HashMap<Integer, String>();
@@ -3570,17 +3569,96 @@ public final class XingZhengDaiMa {
 		area = hashMap.get(code / 10000 * 10000) + area;
 		return area;
 	}
-
+	/**
+		通过省市县获取行政编码
+		市和县不能同时为null
+	*/
+	public static List<String> getCodeByAddr(String sheng,String shi,String xian){
+		String shengCode=valueGetSheng(sheng);
+		List<String> shiCodes=valueGetShis(shengCode.substring(0,2));
+		if(xian==null||xian.isEmpty()){
+			List<String> results=new ArrayList<>();
+			for(String s:shiCodes){
+				if(hashMap.get(Integer.valueOf(s)).equals(shi)){
+					for(String ss:valueGetShis(s.substring(0,4))){
+						results.add(ss);
+					}
+				}
+			}
+			return results;
+		}
+		else{
+			List<String> results=new ArrayList<>();
+			for(String s:shiCodes){
+				if(hashMap.get(Integer.valueOf(s)).equals(xian)){
+					results.add(s);
+					break;
+				}
+			}
+			return results;
+		}
+	}
+	/**
+		prefix为4位
+	*/
+	private static List<String> valueGetXians(String prefix){
+		System.out.println(prefix);
+		Set set = hashMap.keySet();
+		ArrayList arr = new ArrayList<>();
+		Iterator it = set.iterator();
+		while(it.hasNext()) {
+		  String key = String.valueOf((Integer)it.next());
+		  if(key.startsWith(prefix)) {
+			arr.add(key);
+		  }
+		}
+		return arr;
+	}
+	/**
+		prefix为2位
+	*/
+	private static List<String> valueGetShis(String prefix){
+		Set set = hashMap.keySet();
+		ArrayList arr = new ArrayList<>();
+		Iterator it = set.iterator();
+		while(it.hasNext()) {
+		  String key = String.valueOf((Integer)it.next());
+		  if(key.startsWith(prefix)) {
+			arr.add(key);
+		  }
+		}
+		return arr;
+	}
+	private static String valueGetSheng(String value){
+		Set set = hashMap.entrySet();
+		ArrayList arr = new ArrayList<>();
+		Iterator it = set.iterator();
+		while(it.hasNext()) {
+		  Map.Entry entry = (Map.Entry)it.next();
+		  if(entry.getValue().equals(value)) {
+			String code=String.valueOf(entry.getKey());
+			return code;
+		  }
+		}
+		return null;
+	}
 	/**
 	 * 测试使用,不需要可以删除或者注释掉
 	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println(getAreaByCode(440903));
+		/*System.out.println(getAreaByCode(440903));
 		System.out.println(test(450001));
 		System.out.println(test(450000));
 		System.out.println(test(430524));
+		*/
+		List<String> results=getCodeByAddr("**省","**市","");
+		if(results!=null){
+			for(String s:results){
+				System.out.println(s+"=="+hashMap.get(Integer.valueOf(s)));
+			}
+		}
 	}
 
 }
