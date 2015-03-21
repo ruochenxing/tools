@@ -1,6 +1,6 @@
 import java.util.Calendar;
 /**
-结合XingZhengDaiMa.java使用，用于破解身份证号码
+结合XingZhengDaiMa.java使用，用于穷举身份证号码
 */
 public class Crack {
  
@@ -247,25 +247,39 @@ public class Crack {
          */
         void error(String msg);
     }
- 
-    public static void main(String[] args) {
-        Crack crack = new Crack();
-        crack.setNums("*40203198002**252*");
- 
-        crack.cal(new CarckListener() {
-            @Override
-            public int callBack(int i, String s, String area) {
-                System.out.print(String.format("%10d ", i));
-                System.out.print(s);
-                System.out.println(" " + area);
-                return 0;
-            }
- 
-            @Override
-            public void error(String msg) {
-                System.err.println(msg);
-                System.exit(1);
-            }
-        }, true);
+	static int count=0;
+    public static void main(String[] args) throws Exception{
+		java.util.List<String> results=XingZhengDaiMa.getCodeByAddr("**省","**市","**县");
+		for(String s:results){
+			System.out.println(s);
+			Thread.sleep(3*1000);
+			Crack crack = new Crack();
+			crack.setNums(s+"19900000****");
+			crack.cal(new CarckListener() {
+				@Override
+				public int callBack(int i, String s, String area) {
+					if("女".equals(getSex(s))){
+						System.out.print(String.format("第%d个 ", ++count));
+						System.out.print(s);
+						System.out.print(" "+getSex(s));
+						System.out.println(" " + area);
+					}
+					return 0;
+				}
+				@Override
+				public void error(String msg) {
+					System.err.println(msg);
+					System.exit(1);
+				}
+			}, true);
+		}
+		System.out.println("总数为:"+count+"个");
     }
+	private static String getSex(String s){
+		int i=Integer.valueOf(s.substring(16,17));
+		if(i%2==0){
+			return "女";
+		}
+		return "男";
+	}
 }
