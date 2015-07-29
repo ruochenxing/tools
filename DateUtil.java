@@ -172,7 +172,7 @@ public class DateUtil {
 		return result;
 	}
 
-	static String format(int[] result) {
+	public static String format(int[] result) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("[");
 		for (int i = 0; i < result.length - 1; i++)

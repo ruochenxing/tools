@@ -3,6 +3,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
+/**
+ * 统计代码行数
+ */
 public class CrawlerFile {
 
 	private static int lineNum=0;

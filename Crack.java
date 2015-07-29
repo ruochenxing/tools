@@ -1,7 +1,7 @@
 import java.util.Calendar;
 /**
-结合XingZhengDaiMa.java使用，用于穷举身份证号码
-*/
+ *结合XingZhengDaiMa.java使用，用于穷举身份证号码
+ */
 public class Crack {
  
     int[] weightNum = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 };

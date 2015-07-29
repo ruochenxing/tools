@@ -470,15 +470,4 @@ public class FileOperate {
 			return false;
 		}
 	}
-	
-	public static void main(String[] args) {
-		// System.out.println(System.getProperty("user.dir"));
-
-		File file = new File("D:\\java\\workspace_workflow\\obpm\\src\\main\\webapp\\uploads");
-		Collection<File> dirs = deepSearchDirectory(file);
-		for (Iterator<File> iterator = dirs.iterator(); iterator.hasNext();) {
-			File dir = (File) iterator.next();
-			System.out.println(Sequence.getFileUUID(dir, "uploads") +": " + dir.toString());
-		}
-	}
 }
