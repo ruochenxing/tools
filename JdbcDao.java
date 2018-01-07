@@ -14,12 +14,12 @@ public class JdbcDao {
 	private static String DRIVER="com.mysql.jdbc.Driver";
 	private String URL="jdbc:mysql://localhost:3306/db_bbs?useUnicode=true&amp;characterEncoding=utf8";
 	private String USER="root";
-	private String PASSWORD="moshu521";
+	private String PASSWORD="password";
 	/*
 	private static String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	private String URL = "jdbc:sqlserver://127.0.0.1:1433;DatabaseName=wooaDB";
 	private String USER = "sa";
-	private String PASSWORD = "123456";
+	private String PASSWORD = "password";
 	*/
 	private Connection conn;
 	private PreparedStatement pst;
